@@ -6,15 +6,13 @@ import com.example.demo.appuser.AppUserService;
 import com.example.demo.email.EmailSender;
 import com.example.demo.registration.confirmationToken.ConfirmationToken;
 import com.example.demo.registration.confirmationToken.ConfirmationTokenService;
-import com.example.demo.registration.passwordResetToken.PasswordResetToken;
-import com.example.demo.registration.passwordResetToken.PasswordResetTokenService;
+import com.example.demo.passwordRecovery.passwordResetToken.PasswordResetTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -77,32 +75,6 @@ public class RegistrationService {
         return "confirmed";
     }
 
-    @Transactional
-    public String passwordReset(String token, String newPass1, String newPass2){
-        PasswordResetToken passwordResetToken = passwordResetTokenService
-                .getPasswordResetToken(token)
-                .orElseThrow(() ->
-                        new IllegalStateException("token not found"));
-
-        LocalDateTime expiredAt = passwordResetToken.getExpiresAt();
-
-        if(expiredAt.isBefore(LocalDateTime.now())){
-            throw new IllegalStateException("token expired");
-        }
-
-        if(!newPass1.equals(newPass2)){
-            throw new IllegalStateException("Password mismatch");
-        }
-
-        AppUser appUser = (AppUser) appUserService.loadUserByUsername(passwordResetToken.getAppUser().getEmail());
-
-        String encodedPassword = bCryptPasswordEncoder
-                .encode(newPass1);
-        appUser.setPassword(encodedPassword);
-
-        appUserService.save(appUser);
-        return "Password has been successfully changed";
-    }
 
     private String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +

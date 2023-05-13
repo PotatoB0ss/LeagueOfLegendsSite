@@ -1,4 +1,4 @@
-package com.example.demo.registration.passwordResetToken;
+package com.example.demo.passwordRecovery.passwordResetToken;
 
 import com.example.demo.appuser.AppUser;
 import lombok.Getter;
@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -35,6 +34,9 @@ public class PasswordResetToken {
 
     @Column(nullable = false)
     private LocalDateTime expiresAt;
+
+    @Column
+    private boolean used = false;
 
 
     @ManyToOne

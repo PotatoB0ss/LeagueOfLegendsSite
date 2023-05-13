@@ -1,6 +1,8 @@
-package com.example.demo.registration.passwordResetToken;
+package com.example.demo.passwordRecovery.passwordResetToken;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,5 +14,12 @@ public interface PasswordResetTokenRepository
 extends JpaRepository<PasswordResetToken, Long> {
 
     Optional<PasswordResetToken> findByToken(String token);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE PasswordResetToken c " +
+            "SET c.used = true " +
+            "WHERE c.token = ?1")
+    int updateUsed(String token);
 
 }

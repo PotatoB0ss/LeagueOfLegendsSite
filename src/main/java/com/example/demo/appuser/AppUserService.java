@@ -4,8 +4,8 @@ import com.example.demo.email.EmailSender;
 import com.example.demo.registration.EmailValidator;
 import com.example.demo.registration.confirmationToken.ConfirmationToken;
 import com.example.demo.registration.confirmationToken.ConfirmationTokenService;
-import com.example.demo.registration.passwordResetToken.PasswordResetToken;
-import com.example.demo.registration.passwordResetToken.PasswordResetTokenService;
+import com.example.demo.passwordRecovery.passwordResetToken.PasswordResetToken;
+import com.example.demo.passwordRecovery.passwordResetToken.PasswordResetTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -78,7 +78,7 @@ public class AppUserService implements UserDetailsService {
 
     public String resetUserPassword(String email){
 
-        Optional<AppUser> user = appUserRepository.findByEmail(email);      // Пофиксить хуятину эту и проверку не забыть на юзер актив добавить
+        Optional<AppUser> user = appUserRepository.findByEmail(email);
 
         if (user.isEmpty()) {
             // TODO check of attributes are the same and
@@ -101,7 +101,7 @@ public class AppUserService implements UserDetailsService {
         passwordResetTokenService.savePasswordResetToken(
                 passwordResetToken);
 
-        String link = "http://localhost:8080/api/v1/registration/resetPass?token=" + token;
+        String link = "http://localhost:8080/api/v1/recovery/resetPass?token=" + token;
 
         emailSender.send(
                 user.get().getEmail(),
