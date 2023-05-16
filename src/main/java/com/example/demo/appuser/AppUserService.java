@@ -17,6 +17,9 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 @Service
 @AllArgsConstructor
 public class AppUserService implements UserDetailsService {
@@ -105,9 +108,30 @@ public class AppUserService implements UserDetailsService {
 
         emailSender.send(
                 user.get().getEmail(),
-                buildEmailPasswordReset(user.get().getFirstName(), link));
+                buildEmailPasswordReset(user.get().getUserName(), link));
 
         return token;
+    }
+
+    public boolean emailCheck(String email){
+        final String EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches() && appUserRepository.findByEmail(email).isEmpty();
+    }
+
+    public boolean passwordCheck(String password){
+        final String passwordRegex = "^(?!.*[\\u4E00-\\u9FA5]).{5,100}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+
+    public boolean userNameCheck(String username){
+        final String userNameRegex = "^[a-zA-Zа-яА-Я\\s]{3,20}$";;
+        Pattern pattern = Pattern.compile(userNameRegex);
+        Matcher matcher = pattern.matcher(username);
+        return matcher.matches() && appUserRepository.findByUserName(username).isEmpty();
     }
 
     public void save(AppUser user){

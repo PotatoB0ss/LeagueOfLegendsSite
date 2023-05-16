@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>LeagueSite2.0</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href="/assets/css/Pretty-Footer-.css">
+    <link rel="stylesheet" href="/assets/css/Projects-Grid-images.css">
+    <link rel="stylesheet" href="/assets/css/Signup-page-with-overlay.css">
+</head>
+
+<body style="background: var(--bs-gray-300);">
+    <nav class="navbar navbar-light navbar-expand-md py-3" style="background: rgba(241,242,244,0.8);border-bottom: 1px solid #dfe3e7;margin-bottom: 80px;">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span>LeagueGanG</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+            </div><button class="btn btn-light me-xl-3 me-3 btnLogIn" type="button" style="width: 100px;">Log in</button><button class="btn btn-dark me-0 me-xl-3 btnSign" type="button" style="height: 38px;">Sign up</button>
+        </div>
+    </nav><div id="main-wrapper" class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="card border-0">
+                <div class="card-body p-0">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="mb-5">
+                                    <h3 class="h4 font-weight-bold text-theme">Register</h3>
+                                </div>
+                                <h6 class="h5 mb-0">Just Do Register.</h6>
+                                <p class="text-muted mt-2 mb-5">If You Really Want To Use 100% Functionality, Register.</p>
+                                <form action="api/v1/registration" method="POST">
+                                    
+                                    <div class="form-group">
+                                        <label for="userName">Your username</label>
+                                        <input type="text" class="form-control" id="userName" name="userName"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="InputEmail">Email address</label>
+                                        <input type="email" class="form-control" id="InputEmail" pattern=".*" name="email"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwordInput">Password</label>
+                                        <input type="password" class="form-control" id="passwordInput" name="password"/>
+                                    </div>
+                                    
+                                    <div class="form-group mb-5">
+                                        <label for="confirmPasswordInput">Retype password</label>
+                                        <input type="password" class="form-control" id="confirmPasswordInput" />
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-theme" id="registerButton">Register</button>
+                                </form>
+                                </br>
+                                <h4 align="center" id="passTroubles"></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-none d-lg-inline-block">
+                            <div class="account-block rounded-right">
+                                <div class="overlay rounded-right"></div>
+                                <div class="account-testimonial">
+                                    <h4 class="text-white mb-4">An interesting fact</h4>
+                                    <p class="lead text-white">Longer passwords that consist of a combination of letters, numbers, and symbols are more difficult to crack. To create a secure password, it is recommended to use more than 12 characters.</p>
+                                    <p>--- </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card-body -->
+            </div>
+            <!-- end card -->
+            <p class="text-muted text-center mt-3 mb-0">Already have an account? <a href="Login.html" class="text-primary ml-1">login</a></p>
+            <!-- end row -->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- Row -->
+</div>
+    <footer style="margin-top: 100px;">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 footer-navigation">
+                <h3><a href="#">LeagueGanG</a></h3>
+                <p class="company-name">Copyright 2023 LeagueGanG, All Rights Reserved.</p>
+            </div>
+            <div class="col-sm-6 col-md-4 footer-contacts">
+                <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
+                    <p><span class="new-line-span">Am Studio 20A</span> Berlin, Germany</p>
+                </div>
+                <div><i class="fa fa-envelope footer-contacts-icon"></i>
+                    <p> <a href="#" target="_blank">drafasenos317@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="col-md-4 footer-about">
+                <h4>About the company</h4>
+                <p> We provide services in League of Legends.</p>
+                <div class="social-links social-icons"></div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/checkPassword.js"></script>
+    <script src="/assets/js/checkEmail.js"></script>
+    <script src="/assets/js/checkUsername.js"></script>
+</body>
+
+</html>

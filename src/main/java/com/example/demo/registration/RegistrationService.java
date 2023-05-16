@@ -6,9 +6,7 @@ import com.example.demo.appuser.AppUserService;
 import com.example.demo.email.EmailSender;
 import com.example.demo.registration.confirmationToken.ConfirmationToken;
 import com.example.demo.registration.confirmationToken.ConfirmationTokenService;
-import com.example.demo.passwordRecovery.passwordResetToken.PasswordResetTokenService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +20,7 @@ public class RegistrationService {
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
-    private final PasswordResetTokenService passwordResetTokenService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.
@@ -35,8 +32,7 @@ public class RegistrationService {
 
         String token = appUserService.signUpUser(
                 new AppUser(
-                        request.getFirstName(),
-                        request.getLastName(),
+                        request.getUserName(),
                         request.getEmail(),
                         request.getPassword(),
                         AppUserRole.USER
@@ -47,7 +43,7 @@ public class RegistrationService {
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         emailSender.send(
                 request.getEmail(),
-                buildEmail(request.getFirstName(), link));
+                buildEmail(request.getUserName(), link));
 
         return token;
     }
