@@ -41,14 +41,14 @@
                                 <h6 class="h5 mb-0">Welcome back!</h6>
                                 <p class="text-muted mt-2 mb-5">Come visit us don't be shy.</p>
 
-                                <form>
+                                <form action="api/v1/login" method="POST">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1">
+                                        <input type="email" class="form-control" id="exampleInputEmail1" name="login">
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1">
+                                        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                                     </div>
                                     <button type="submit" class="btn btn-theme">Login</button>
                                     
@@ -75,7 +75,7 @@
             </div>
             <!-- end card -->
 
-            <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="register.html" class="text-primary ml-1">register</a> or <a href="#l">forgot password?</a></p>
+            <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="/register" class="text-primary ml-1">register</a> or <a href="#l">forgot password?</a></p>
 
             <!-- end row -->
 
