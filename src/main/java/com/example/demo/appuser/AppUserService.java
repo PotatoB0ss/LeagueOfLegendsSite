@@ -31,7 +31,6 @@ public class AppUserService implements UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
     private final PasswordResetTokenService passwordResetTokenService;
-    private final EmailValidator emailValidator;
     private final EmailSender emailSender;
 
     @Override
