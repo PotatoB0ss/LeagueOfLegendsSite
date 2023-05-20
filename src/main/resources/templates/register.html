@@ -15,17 +15,12 @@
 </head>
 
 <body style="background: var(--bs-gray-300);">
-    <nav class="navbar navbar-light navbar-expand-md py-3" style="background: rgba(241,242,244,0.8);border-bottom: 1px solid #dfe3e7;margin-bottom: 80px;">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span>LeagueGanG</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                </ul>
-            </div><button class="btn btn-light me-xl-3 me-3 btnLogIn" type="button" style="width: 100px;">Log in</button><button class="btn btn-dark me-0 me-xl-3 btnSign" type="button" style="height: 38px;">Sign up</button>
-        </div>
-    </nav><div id="main-wrapper" class="container">
+<!-- HEADER -->
+
+<th:block th:if="${authenticated}" th:insert="thymeleafParts/authorizeHeader.html"></th:block>
+<th:block th:unless="${authenticated}" th:insert="thymeleafParts/unauthorizeHeader.html"></th:block>
+
+<div id="main-wrapper" class="container" style="margin-top:100px ">
     <div class="row justify-content-center">
         <div class="col-xl-10">
             <div class="card border-0">
@@ -86,27 +81,10 @@
     </div>
     <!-- Row -->
 </div>
-    <footer style="margin-top: 100px;">
-        <div class="row">
-            <div class="col-sm-6 col-md-4 footer-navigation">
-                <h3><a href="#">LeagueGanG</a></h3>
-                <p class="company-name">Copyright 2023 LeagueGanG, All Rights Reserved.</p>
-            </div>
-            <div class="col-sm-6 col-md-4 footer-contacts">
-                <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
-                    <p><span class="new-line-span">Am Studio 20A</span> Berlin, Germany</p>
-                </div>
-                <div><i class="fa fa-envelope footer-contacts-icon"></i>
-                    <p> <a href="#" target="_blank">drafasenos317@gmail.com</a></p>
-                </div>
-            </div>
-            <div class="col-md-4 footer-about">
-                <h4>About the company</h4>
-                <p> We provide services in League of Legends.</p>
-                <div class="social-links social-icons"></div>
-            </div>
-        </div>
-    </footer>
+<!-- FOOTER -->
+
+<th:block th:insert="thymeleafParts/footer.html"></th:block>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/js/checkPassword.js"></script>

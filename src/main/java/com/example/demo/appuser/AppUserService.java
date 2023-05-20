@@ -1,7 +1,6 @@
 package com.example.demo.appuser;
 
 import com.example.demo.email.EmailSender;
-import com.example.demo.registration.EmailValidator;
 import com.example.demo.registration.confirmationToken.ConfirmationToken;
 import com.example.demo.registration.confirmationToken.ConfirmationTokenService;
 import com.example.demo.passwordRecovery.passwordResetToken.PasswordResetToken;
@@ -107,7 +106,7 @@ public class AppUserService implements UserDetailsService {
 
         emailSender.send(
                 user.get().getEmail(),
-                buildEmailPasswordReset(user.get().getUserName(), link));
+                buildEmailPasswordReset(user.get().getName(), link));
 
         return token;
     }
@@ -130,7 +129,7 @@ public class AppUserService implements UserDetailsService {
         final String userNameRegex = "^[a-zA-Zа-яА-Я\\s]{3,20}$";;
         Pattern pattern = Pattern.compile(userNameRegex);
         Matcher matcher = pattern.matcher(username);
-        return matcher.matches() && appUserRepository.findByUserName(username).isEmpty();
+        return matcher.matches() && appUserRepository.findByName(username).isEmpty();
     }
 
     public void save(AppUser user){
