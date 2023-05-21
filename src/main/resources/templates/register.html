@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/assets/css/Signup-page-with-overlay.css">
 </head>
 
-<body style="background: var(--bs-gray-300);">
+<body style="background: var(--bs-gray-300);height: 100%;width: 100%;">
 <!-- HEADER -->
 
 <th:block th:if="${authenticated}" th:insert="thymeleafParts/authorizeHeader.html"></th:block>
@@ -33,8 +33,9 @@
                                 </div>
                                 <h6 class="h5 mb-0">Just Do Register.</h6>
                                 <p class="text-muted mt-2 mb-5">If You Really Want To Use 100% Functionality, Register.</p>
-                                <form action="api/v1/registration" method="POST">
-                                    
+                                <form th:action="@{api/v1/registration}" method="POST">
+
+
                                     <div class="form-group">
                                         <label for="userName">Your username</label>
                                         <input type="text" class="form-control" id="userName" name="userName"/>
@@ -74,7 +75,7 @@
                 <!-- end card-body -->
             </div>
             <!-- end card -->
-            <p class="text-muted text-center mt-3 mb-0">Already have an account? <a href="login.html" class="text-primary ml-1">login</a></p>
+            <p class="text-muted text-center mt-3 mb-0">Already have an account? <a href="/login" class="text-primary ml-1">login</a></p>
             <!-- end row -->
         </div>
         <!-- end col -->

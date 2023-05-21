@@ -41,13 +41,17 @@ public class MainController {
 
     @GetMapping(path = "/logout")
     public String logout(){
-        return "main";
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "redirect:/main";
     }
 
 
     @GetMapping(path ="reset")
-    public String reset(){
-        return "passwordReset/resetEmail";
+    public String reset(Model model){
+        if (autheticationChecker.authenticationCheck(model)) {
+            return "redirect:/main";
+        }
+        return "passwordReset/passwordRecovery";
     }
 
 

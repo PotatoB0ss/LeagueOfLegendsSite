@@ -2,6 +2,7 @@ package com.example.demo.passwordRecovery;
 
 import com.example.demo.appuser.AppUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,10 +20,12 @@ public class RecoveryController {
     }
 
     @GetMapping(path = "resetPass")
-    public ModelAndView passwordReset(@RequestParam("token") String token){
-        if(recoveryService.tokenCheck(token)){
-            return new ModelAndView("passwordReset/resetEmailPass");
+    public ModelAndView passwordReset(@RequestParam("token") String token, Model model){
+        String result = recoveryService.tokenCheck(token);
+        if(result.equals("the token is correct")){
+            return new ModelAndView("passwordReset/newPasswordInput");
         }
+        model.addAttribute("reason", recoveryService.tokenCheck(token));
         return new ModelAndView("passwordReset/resetEmailPassWrong");
     }
 

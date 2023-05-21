@@ -27,6 +27,7 @@ public class RecoveryService {
                 .orElseThrow(() ->
                         new IllegalStateException("token not found"));
 
+
         LocalDateTime expiredAt = passwordResetToken.getExpiresAt();
 
         if(expiredAt.isBefore(LocalDateTime.now())){
@@ -51,9 +52,24 @@ public class RecoveryService {
         return "Password has been successfully changed";
     }
 
-    protected boolean tokenCheck(String token){
-        Optional<PasswordResetToken> passToken = passwordResetTokenService.getPasswordResetToken(token);
-        return passToken.isPresent() && !passToken.get().isUsed();
+    protected String tokenCheck(String token){
+        PasswordResetToken passwordResetToken = passwordResetTokenService
+                .getPasswordResetToken(token)
+                .orElseThrow(() ->
+                        new IllegalStateException("token not found"));
+
+        LocalDateTime expiredAt = passwordResetToken.getExpiresAt();
+
+        if(expiredAt.isBefore(LocalDateTime.now())){
+            return "token expired";
+        }
+
+        if(passwordResetToken.isUsed()){
+            return "token has already used";
+        }
+
+
+        return "the token is correct";
     }
 
 }

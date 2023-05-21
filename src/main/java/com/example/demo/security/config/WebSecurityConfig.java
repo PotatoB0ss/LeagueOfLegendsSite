@@ -1,7 +1,6 @@
 package com.example.demo.security.config;
 
 import com.example.demo.appuser.AppUserService;
-import com.example.demo.security.AuthorizationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 
 @Configuration
@@ -29,13 +27,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
                 .authorizeRequests()
-                    .antMatchers("/api/v*/registration/**", "/api/v*/registration", "/api/v1/login","/login", "/register", "/main")
+                    .antMatchers("/api/v*/registration/**", "/api/v1/login","/api/v*/recovery/**","/login",
+                            "/register", "/main", "/reset")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
                     .and()
-                .addFilterBefore(authorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/register")
+                    .invalidateHttpSession(true) // Очистка HTTP-сессии
+                    .clearAuthentication(true)
+                    .deleteCookies("JSESSIONID") // Удаление куки, если необходимо
+                    .permitAll();
 
     }
 
@@ -45,7 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         web.ignoring()
                 .antMatchers("/bootstrap/**", "/css/**", "/js/**", "/assets/**",
-                        "/assets/**/**", "/assets/**/**/**", "/assets/js/**");
+                        "/assets/**/**", "/assets/**/**/**", "/assets/js/**", "/api/v1/registration/check**", "/blocks/**",
+                        "/api/v1/recovery/**", "/passwordReset/**");
     }
 
 
@@ -55,10 +63,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 
-
-    public AuthorizationFilter authorizationFilter() {
-        return new AuthorizationFilter();
-    }
 
 
     @Bean

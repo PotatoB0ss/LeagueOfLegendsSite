@@ -9,9 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,21 +36,15 @@ public class LoginController {
     // -- I want to display on the page that login or password is incorrect
 
     @PostMapping()
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password,
-                        HttpServletRequest request){
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password){
         try {
             UsernamePasswordAuthenticationToken authRequest =
                     new UsernamePasswordAuthenticationToken(email, password);
-
-
-            HttpSession session = request.getSession(true);
 
             Authentication authentication = daoAuthenticationProvider.authenticate(authRequest);
 
             log.debug("==AUTHENTICATION==\n{}\n ==END==", authentication);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            session.setAttribute("authentication", authentication);
 
             return "redirect:/main";
         }

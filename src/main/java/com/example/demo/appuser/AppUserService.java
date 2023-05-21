@@ -83,11 +83,13 @@ public class AppUserService implements UserDetailsService {
 
         if (user.isEmpty()) {
             // TODO check of attributes are the same and
-            throw new IllegalStateException("The user with this email not found");
+
+            return "The user with this email not found";
+
         }
 
         if (!user.get().isEnabled()){
-            throw new IllegalStateException("Your email is not verified");
+            return "Your email is not verified";
         }
 
         String token = UUID.randomUUID().toString();
@@ -108,7 +110,7 @@ public class AppUserService implements UserDetailsService {
                 user.get().getEmail(),
                 buildEmailPasswordReset(user.get().getName(), link));
 
-        return token;
+        return "A link to change your password has been sent to your email!";
     }
 
     public boolean emailCheck(String email){
