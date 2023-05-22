@@ -1,15 +1,19 @@
 package com.example.demo.Controllers;
 
 
-import com.example.demo.appuser.AppUser;
 import com.example.demo.login.AutheticationChecker;
-import org.springframework.security.core.Authentication;
+import com.example.demo.other.CheckMMR;
+import com.example.demo.other.DataMMR;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -52,6 +56,28 @@ public class MainController {
             return "redirect:/main";
         }
         return "passwordReset/passwordRecovery";
+    }
+
+    @GetMapping(path = "/mmrCheck")
+    public String checkMmr(Model model){
+        autheticationChecker.authenticationCheck(model);
+        return "mmrChecker";
+    }
+
+
+    @PostMapping("/mmrChecks")
+    @ResponseBody
+    public Map<String, Object> checkMmrRequest(Model model, @RequestBody DataMMR dataMMR){
+        autheticationChecker.authenticationCheck(model);
+        Map<String, Object> response = new HashMap<>();
+
+        CheckMMR checkMMR = new CheckMMR();
+        response.put("uss", checkMMR.inputData(dataMMR.getUsername(), dataMMR.getRegion(), response));
+
+
+
+        return response;
+
     }
 
 

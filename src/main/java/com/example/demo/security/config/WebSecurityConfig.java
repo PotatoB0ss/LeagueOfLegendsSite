@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     .antMatchers("/api/v*/registration/**", "/api/v1/login","/api/v*/recovery/**","/login",
-                            "/register", "/main", "/reset")
+                            "/register", "/main", "/reset", "/mmrCheck")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/bootstrap/**", "/css/**", "/js/**", "/assets/**",
                         "/assets/**/**", "/assets/**/**/**", "/assets/js/**", "/api/v1/registration/check**", "/blocks/**",
-                        "/api/v1/recovery/**", "/passwordReset/**");
+                        "/api/v1/recovery/**", "/passwordReset/**", "/mmrChecks");
     }
 
 
