@@ -16,7 +16,7 @@ import java.util.Map;
 public class CheckMMR {
 
     public String inputData(String username, String server, Map<String, Object> response) {
-        System.setProperty("webdriver.chrome.driver", "C:\\IdeaProjects\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless", "--window-size=1920,1080", "--start-maximized");

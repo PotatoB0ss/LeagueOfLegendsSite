@@ -40,7 +40,7 @@ public class MainController {
         if (autheticationChecker.authenticationCheck(model)) {
             return "redirect:/main";
         }
-        return "/login";
+        return "loggin";
     }
 
     @GetMapping(path = "/logout")
