@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/registration</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="railway@containers-us-west-130.railway.app" uuid="6f3dbe8a-ed28-4cbb-8b68-6357e0d09767">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://containers-us-west-130.railway.app:7627/railway</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

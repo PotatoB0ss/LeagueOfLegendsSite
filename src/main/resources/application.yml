@@ -2,12 +2,13 @@ server:
   error:
     include-message: always
     include-binding-errors: always
+  port: 80
 
 spring:
   datasource:
-    password:
-    url: jdbc:postgresql://127.0.0.1:5432/registration
-    username: postgres
+    password: koko2022
+    url: jdbc:postgresql://localhost/registration
+    username: potato
   jpa:
     hibernate:
       ddl-auto: create

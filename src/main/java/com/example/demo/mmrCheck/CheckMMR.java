@@ -26,24 +26,24 @@ public class CheckMMR {
 
 
         driver.get("https://mylolmmr.com/");
-//        String resultServer = switch (server) {
-//            case "RU" -> "ru";
-//            case "EUW" -> "euw1";
-//            case "NA" -> "na1";
-//            case "EUNE" -> "eun1";
-//            case "JP" -> "jp1";
-//            case "KR" -> "kr";
-//            case "BR" -> "br1";
-//            case "LAN" -> "la1";
-//            case "OC" -> "oc1";
-//            case "TR" -> "tr1";
-//            default -> "Server error";
-//        };
+        String resultServer = switch (server) {
+            case "RU" -> "ru";
+            case "EUW" -> "euw1";
+            case "NA" -> "na1";
+            case "EUNE" -> "eun1";
+            case "JP" -> "jp1";
+            case "KR" -> "kr";
+            case "BR" -> "br1";
+            case "LAN" -> "la1";
+            case "OC" -> "oc1";
+            case "TR" -> "tr1";
+            default -> "Server error";
+        };
 
         WebDriverWait wait = new WebDriverWait(driver, 5);
 
 
-        String reg = String.format("div[data-value='%s']", "ru");
+        String reg = String.format("div[data-value='%s']", resultServer);
 
         WebElement inputElement = driver.findElement(By.id("username"));
         WebElement searchButton = driver.findElement(By.id("searchIcon"));
