@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="/assets/css/Pretty-Footer-.css">
     <link rel="stylesheet" href="/assets/css/Projects-Grid-images.css">
     <link rel="stylesheet" href="/assets/css/Signup-page-with-overlay.css">
+    <link rel="stylesheet" href="/assets/css/Animated-Pretty-Product-List-v12-Animated-Pretty-Product-List.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body style="background: var(--bs-gray-300);height: 100%;width: 100%;">
@@ -49,13 +51,17 @@
                                         <input type="password" class="form-control" id="passwordInput" name="password"/>
                                     </div>
                                     
-                                    <div class="form-group mb-5">
+                                    <div class="form-group mb-3">
                                         <label for="confirmPasswordInput">Retype password</label>
                                         <input type="password" class="form-control" id="confirmPasswordInput" />
                                     </div>
-                                    
+
+                                    <div class="g-recaptcha mb-3" data-sitekey="6LcWdjEmAAAAAAWz0cypxSL7yHS1FAZ-5UCybihU"></div>
+                                    <input type="hidden" name="recaptchaResponse" id="recaptchaResponse" />
+
                                     <button type="submit" class="btn btn-theme" id="registerButton">Register</button>
                                 </form>
+
                                 </br>
                                 <h4 align="center" id="passTroubles"></h4>
                             </div>
@@ -63,7 +69,7 @@
                         <div class="col-lg-6 d-none d-lg-inline-block">
                             <div class="account-block rounded-right">
                                 <div class="overlay rounded-right"></div>
-                                <div class="account-testimonial">
+                                <div class="account-testimonial" style="margin-bottom: 30%">
                                     <h4 class="text-white mb-4">An interesting fact</h4>
                                     <p class="lead text-white">Longer passwords that consist of a combination of letters, numbers, and symbols are more difficult to crack. To create a secure password, it is recommended to use more than 12 characters.</p>
                                     <p>--- </p>
@@ -87,6 +93,7 @@
 <th:block th:insert="thymeleafParts/footer.html"></th:block>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/captchaFill.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/js/checkPassword.js"></script>
     <script src="/js/checkEmail.js"></script>

@@ -2,6 +2,7 @@ package com.example.demo.registration;
 
 
 import com.example.demo.appuser.AppUserService;
+import com.example.demo.captcha.RecaptchaService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +14,17 @@ public class RegistrationController {
 
     private final RegistrationService registrationService;
     private final AppUserService appUserService;
+    private final RecaptchaService recaptchaService;
 
 
     @PostMapping()
-    public String register(@ModelAttribute RegistrationRequest request) {
-        return registrationService.register(request);
+    public String register(@ModelAttribute RegistrationRequest request, @RequestParam("recaptchaResponse") String recaptchaResponse) {
+        boolean isValidRecaptcha = recaptchaService.verifyRecaptcha(recaptchaResponse);
+        if (isValidRecaptcha) {
+            return registrationService.register(request);
+        } else {
+            return "Error: incorrect reCAPTCHA";
+        }
     }
 
     @GetMapping(path = "confirm")

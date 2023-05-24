@@ -2,8 +2,8 @@ package com.example.demo.Controllers;
 
 
 import com.example.demo.login.AutheticationChecker;
-import com.example.demo.other.CheckMMR;
-import com.example.demo.other.DataMMR;
+import com.example.demo.mmrCheck.CheckMMR;
+import com.example.demo.mmrCheck.DataMMR;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

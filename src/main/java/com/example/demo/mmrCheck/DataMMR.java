@@ -1,4 +1,4 @@
-package com.example.demo.other;
+package com.example.demo.mmrCheck;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
