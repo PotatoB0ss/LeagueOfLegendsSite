@@ -5,8 +5,8 @@ server:
 
 spring:
   datasource:
-    password:
-    url: jdbc:postgresql://127.0.0.1:5432/registration
+    password: GWsvlhahO5pl8zDY6gsr
+    url: postgresql://postgres:GWsvlhahO5pl8zDY6gsr@containers-us-west-130.railway.app:7627/railway
     username: postgres
   jpa:
     hibernate:
