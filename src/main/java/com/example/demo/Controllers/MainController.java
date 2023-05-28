@@ -4,13 +4,11 @@ package com.example.demo.Controllers;
 import com.example.demo.login.AutheticationChecker;
 import com.example.demo.mmrCheck.CheckMMR;
 import com.example.demo.mmrCheck.DataMMR;
+import com.example.demo.utility.ProductChecker;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +31,14 @@ public class MainController {
             return "redirect:/main";
         }
         return "register";
+    }
+
+    @GetMapping(path="/mb")
+    public String miniBuy(Model model, @RequestParam("productNumber") String productName){
+        autheticationChecker.authenticationCheck(model);
+        ProductChecker productChecker = new ProductChecker();
+        productChecker.productCheck(model, productName);
+        return "modalBuy";
     }
 
     @GetMapping(path = "/login")
@@ -74,11 +80,11 @@ public class MainController {
         CheckMMR checkMMR = new CheckMMR();
         response.put("uss", checkMMR.inputData(dataMMR.getUsername(), dataMMR.getRegion(), response));
 
-
-
         return response;
 
     }
+
+
 
 
 }

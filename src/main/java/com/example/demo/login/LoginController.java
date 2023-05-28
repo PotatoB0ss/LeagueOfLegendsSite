@@ -49,11 +49,8 @@ public class LoginController {
             return "redirect:/main";
         }
         catch (AuthenticationException e){
-            // Ошибки тут обрабатывать мне по идеи не понадобиться так как redirect не будет
-            // Тк контролер я поменяю на Rest Controller и в завимости от ответа который я получу в AJAX запросе
-            // Я либо перекину пользователя на мейн страницу либо на той же где то под кнопкой логина напишу
-            // напишу что юзер дубина и логин либо пароль неверны
-            return "redirect:/login?error";
+
+            return "redirect:/login?error=IncorrectData";
         }
 
     }

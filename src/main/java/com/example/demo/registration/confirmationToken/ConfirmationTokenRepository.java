@@ -16,6 +16,16 @@ public interface ConfirmationTokenRepository
 
     Optional<ConfirmationToken> findByToken(String token);
 
+    @Query("SELECT ct FROM ConfirmationToken ct WHERE ct.appUser.id = ?1")
+    Optional<ConfirmationToken> checkToken(Long id);
+
+
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM ConfirmationToken c WHERE c.token = ?1")
+    int deleteByToken(String token);
+
+
     @Transactional
     @Modifying
     @Query("UPDATE ConfirmationToken c " +

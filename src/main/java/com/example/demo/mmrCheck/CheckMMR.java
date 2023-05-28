@@ -1,9 +1,6 @@
 package com.example.demo.mmrCheck;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Map;
 
 
@@ -20,7 +18,7 @@ public class CheckMMR {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--window-size=1920,1080", "--start-maximized");
+        options.addArguments("--headless","--window-size=1920,1080", "--start-maximized", "--disable-notifications", "--no-sandbox", "--disable-dev-shm-usage");
 
         WebDriver driver = new ChromeDriver(options);
 
@@ -42,12 +40,20 @@ public class CheckMMR {
 
         WebDriverWait wait = new WebDriverWait(driver, 5);
 
+        List<WebElement> cookieAcceptList = driver.findElements(By.cssSelector("button.fc-button.fc-cta-consent.fc-primary-button"));
+        if (!cookieAcceptList.isEmpty()) {
+            WebElement cookieAccept = cookieAcceptList.get(0);
+            wait.until(ExpectedConditions.visibilityOf(cookieAccept));
+            cookieAccept.click();
+        }
+
 
         String reg = String.format("div[data-value='%s']", resultServer);
 
         WebElement inputElement = driver.findElement(By.id("username"));
         WebElement searchButton = driver.findElement(By.id("searchIcon"));
         WebElement region = driver.findElement(By.cssSelector(reg));
+
         region.click();
         inputElement.sendKeys(username);
         searchButton.click();

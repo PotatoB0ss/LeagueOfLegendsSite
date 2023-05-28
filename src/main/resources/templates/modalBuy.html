@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>LeagueSite2.0</title>
+
+
+    <link rel="stylesheet" href="/assets/css/modalForm.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/numberInputCheck.js"></script>
+
+
+</head>
+
+
+
+<div class="container">
+    <section class="product">
+        <div class="product__details">
+            <h1 class="product__details-heading" th:text="${prodName}">RU | ACTIVE | 30+</h1>
+            <span class="product__details-sub-heading"></span>
+
+            <div class="product__details-image-wrapper">
+                <img class="product__details-image" width="256" height="158" th:src="${prodImg}" alt="">
+            </div>
+
+            <div class="product__details-basket">
+                <div class="product__details-basket-item">
+
+
+                </div>
+
+                <div class="product__details-basket-item">
+                    <span class="product__details-basket-heading product__details-basket-heading--right">Price</span>
+                    <span class="product__details-basket-price" data-product-price th:text="${prodPrice}">$386.78</span>
+                </div>
+            </div>
+        </div>
+
+        <form class="card-details" action="" data-form>
+            <fieldset class="card-details__fieldset">
+
+                <div class="card-details__cards" data-card-types>
+
+
+                    <div class="card-details__cards-item">
+
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="card-details__fieldset">
+                <span class="card-details__heading">Enter your name</span>
+
+                <div class="card-details__holder">
+                    <div class="card-details__number-field">
+                        <input class="card-details__holder-input" type="text" id="cardHolder" data-input>
+                    </div>
+
+
+                    <div class="card-details__number-card">
+
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="card-details__fieldset">
+                <span class="card-details__heading" aria-hidden="true">Enter your email</span>
+                <div class="card-details__holder">
+                    <label class="card-details__holder-label" for="userName"></label>
+                    <input class="card-details__holder-input" type="email" id="userName" data-input>
+                </div>
+            </fieldset>
+
+            <fieldset class="card-details__fieldset">
+                <div class="card-details__expiration">
+                    <span class="card-details__heading" aria-hidden="true">Quantity</span>
+                    <div class="card-details__expiration-date">
+                        <label class="card-details__expiration-date-label" for="numberInput">Amount</label>
+                        <input class="card-details__expiration-date-input" type="number" value="1" id="numberInput" oninput="checkNumberRange()" data-input>
+                    </div>
+                </div>
+
+                <div class="card-details__security">
+                    <span class="card-details__heading" aria-hidden="true"></span>
+                    <div class="card-details__details__security-code">
+                        <label class="card-details__security-code-label" for="numberInput"></label>
+
+                    </div>
+                </div>
+            </fieldset>
+
+            <button class="card-details__submit" type="button" data-submit-button>Purchase</button>
+        </form>
+    </section>
+
+
+</div>

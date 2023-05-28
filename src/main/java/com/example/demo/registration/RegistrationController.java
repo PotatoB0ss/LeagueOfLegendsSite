@@ -5,6 +5,7 @@ import com.example.demo.appuser.AppUserService;
 import com.example.demo.captcha.RecaptchaService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 @RestController
@@ -28,8 +29,14 @@ public class RegistrationController {
     }
 
     @GetMapping(path = "confirm")
-    public String confirm(@RequestParam("token") String token) {
-        return registrationService.confirmToken(token);
+    public RedirectView confirm(@RequestParam("token") String token) {
+        if (registrationService.confirmToken(token).equals("confirmed")) {
+            RedirectView redirectView = new RedirectView();
+            redirectView.setUrl("/login");
+            return redirectView;
+        }
+
+        return null;
     }
 
     @PostMapping(path = "checkEmail")

@@ -30,13 +30,17 @@ public class RegistrationService {
             throw new IllegalStateException("email not valid");
         }
 
+        boolean isValidPassword = emailValidator.testPasword(request.getPassword(), request.getPassword2());
+        if(!isValidPassword){
+            throw new IllegalStateException("Password mismatch or unacceptable");
+        }
+
         String token = appUserService.signUpUser(
                 new AppUser(
                         request.getUserName(),
                         request.getEmail(),
                         request.getPassword(),
                         AppUserRole.USER
-
                 )
         );
 
