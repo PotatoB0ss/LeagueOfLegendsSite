@@ -20,6 +20,7 @@
     <section class="product">
         <div class="product__details">
             <h1 class="product__details-heading" th:text="${prodName}">RU | ACTIVE | 30+</h1>
+            <input type="hidden" th:attr="value=${prodStock}" id="stock">
             <span class="product__details-sub-heading"></span>
 
             <div class="product__details-image-wrapper">
@@ -34,7 +35,7 @@
 
                 <div class="product__details-basket-item">
                     <span class="product__details-basket-heading product__details-basket-heading--right">Price</span>
-                    <span class="product__details-basket-price" data-product-price th:text="${prodPrice}">$386.78</span>
+                    <span class="product__details-basket-price" th:attr="data-initial-price=${prodPrice}" th:text="${prodPrice}" id="productPrice">$0.00</span>
                 </div>
             </div>
         </div>

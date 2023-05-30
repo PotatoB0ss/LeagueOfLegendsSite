@@ -16,7 +16,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @AllArgsConstructor
-@EnableWebSecurity
+@EnableWebSecurity()
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AppUserService appUserService;
@@ -31,11 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     .antMatchers("/api/v*/registration/**", "/api/v1/login","/api/v*/recovery/**","/login",
-                            "/register", "/main", "/reset", "/mmrCheck", "/admin", "/mb")
+                            "/register", "/main", "/reset", "/mmrCheck","/mb", "/admin")
                     .permitAll()
+                    .antMatchers("/admin")
+                    .hasRole("ADMIN")
                     .anyRequest()
                     .authenticated()
-                    .and()
+                .and()
                 .logout()
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/register")
@@ -53,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/bootstrap/**", "/css/**", "/js/**", "/assets/**",
                         "/assets/**/**", "/assets/**/**/**", "/assets/js/**", "/api/v1/registration/check**", "/blocks/**",
-                        "/api/v1/recovery/**", "/passwordReset/**", "/mmrChecks");
+                        "/api/v1/recovery/**", "/passwordReset/**", "/mmrChecks", "/accountData");
     }
 
 

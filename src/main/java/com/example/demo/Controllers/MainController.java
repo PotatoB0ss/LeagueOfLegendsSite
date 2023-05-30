@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 
+import com.example.demo.accounts.*;
 import com.example.demo.login.AutheticationChecker;
 import com.example.demo.mmrCheck.CheckMMR;
 import com.example.demo.mmrCheck.DataMMR;
@@ -19,11 +20,20 @@ public class MainController {
 
     AutheticationChecker autheticationChecker = new AutheticationChecker();
 
+    private final AccountService accountService;
+
+    public MainController(AccountService accountService) {
+        this.accountService = accountService;
+    }
+
+
     @GetMapping(path = "main")
     public String basePage(Model model) {
         autheticationChecker.authenticationCheck(model);
+        accountService.getAccountsCount(model);
         return "main";
     }
+
 
     @GetMapping(path="/register")
     public String register(Model model){
@@ -36,7 +46,7 @@ public class MainController {
     @GetMapping(path="/mb")
     public String miniBuy(Model model, @RequestParam("productNumber") String productName){
         autheticationChecker.authenticationCheck(model);
-        ProductChecker productChecker = new ProductChecker();
+        ProductChecker productChecker = new ProductChecker(accountService);
         productChecker.productCheck(model, productName);
         return "modalBuy";
     }
@@ -70,6 +80,19 @@ public class MainController {
         return "mmrChecker";
     }
 
+    @GetMapping(path = "/admin")
+    public String adminOpen(Model model){
+        autheticationChecker.authenticationCheck(model);
+        return "admin";
+    }
+
+    @PostMapping(path ="/addAccount")
+    public String addAccount(Model model, @ModelAttribute Account account){
+        autheticationChecker.authenticationCheck(model);
+        accountService.save(account);
+        return "admin";
+    }
+
 
     @PostMapping("/mmrChecks")
     @ResponseBody
@@ -81,6 +104,20 @@ public class MainController {
         response.put("uss", checkMMR.inputData(dataMMR.getUsername(), dataMMR.getRegion(), response));
 
         return response;
+
+    }
+
+
+    @PostMapping("/accountData")
+    @ResponseBody
+    public Map<String, Object> getAccountData(Model model){
+        autheticationChecker.authenticationCheck(model);
+        Map<String, Object> accountData = new HashMap<>();
+        accountService.getAccountsCount(model);
+
+        accountData.put("model", model);
+
+        return accountData;
 
     }
 

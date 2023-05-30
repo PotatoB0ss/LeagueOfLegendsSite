@@ -40,7 +40,7 @@ public class RegistrationService {
                         request.getUserName(),
                         request.getEmail(),
                         request.getPassword(),
-                        AppUserRole.USER
+                        AppUserRole.ROLE_USER
                 )
         );
 
@@ -49,7 +49,7 @@ public class RegistrationService {
                 request.getEmail(),
                 buildEmail(request.getUserName(), link));
 
-        return token;
+        return "CHECK YOUR EMAIL! :)";
     }
 
     @Transactional

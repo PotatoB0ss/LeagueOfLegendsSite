@@ -1,6 +1,5 @@
 package com.example.demo.appuser;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +13,6 @@ import java.util.Collections;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @NoArgsConstructor
 @Entity
 public class AppUser implements UserDetails {
@@ -90,6 +88,10 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public String getAppUserRole() {
+        return appUserRole.name();
     }
 
     @Override

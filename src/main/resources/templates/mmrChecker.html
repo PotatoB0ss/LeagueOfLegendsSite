@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="/assets/css/Projects-Grid-images.css">
     <link rel="stylesheet" href="/assets/css/Rounded-Search-Input-field.css">
     <link rel="stylesheet" href="/assets/css/Signup-page-with-overlay.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/icecream.css" />
+
 </head>
 
 <body style="background: var(--bs-gray-300);">
@@ -24,6 +27,9 @@
 <th:block th:unless="${authenticated}" th:insert="thymeleafParts/unauthorizeHeader.html"></th:block>
 
     <div class="row mb-5">
+
+
+
         <div class="col-md-8 col-xl-6 text-center mx-auto pt-0 mt-5">
             <h2 style="font-size: 45px;">MMR CHECKER<div>
     <input type="text" class="search-field" id="playerName" placeholder="Search a player"/>
@@ -34,9 +40,48 @@
     <section class="py-4 py-xl-5 pt-5 pt-xl-5 pt-xxl-5" style="padding-top: 28px;margin-top: -45px;">
         <div class="container">
             <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5 rank" style="height: 500px;background: var(--bs-gray-300);padding-top: 50px;">
-                <h1 class="text-uppercase fw-bold mb-3" style="margin-top: 3px;padding-top: 0px;margin-bottom: -20px;padding-bottom: 0px;" id="nameH1"></h1>
+                <h1 class="text-uppercase fw-bold mb-3" style="margin-top: 3px;padding-top: 0px;margin-bottom: -20px;padding-bottom: 0px;" id="nameH1">
+                    <div class="cccc">
+                        <div class="rarara">
+                            <div class="circircir">
+                                <div class="face-wrapper">
+                                    <div class="eyes"></div>
+                                    <div class="eyes"></div>
+                                    <div class="circle-mouth"></div>
+                                </div>
+                            </div>
+                            <div class="cone-top"></div>
+                            <div class="cone">
+                                <div class="face-wrapper">
+                                    <div class="eyes"></div>
+                                    <div class="eyes"></div>
+                                    <div class="mouth"></div>
+                                </div>
+                            </div>
+                            <div class="cone-bottom"></div>
+                        </div>
+                        <div class="bottom-shadow"></div>
+                    </div>
+                </h1>
                 <div id="loadingOverlay">
-                    <div id="loadingSpinner" class="spinner"></div>
+                    <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
+                        <div class="wheel"></div>
+                        <div class="hamster">
+                            <div class="hamster__body">
+                                <div class="hamster__head">
+                                    <div class="hamster__ear"></div>
+                                    <div class="hamster__eye"></div>
+                                    <div class="hamster__nose"></div>
+                                </div>
+                                <div class="hamster__limb hamster__limb--fr"></div>
+                                <div class="hamster__limb hamster__limb--fl"></div>
+                                <div class="hamster__limb hamster__limb--br"></div>
+                                <div class="hamster__limb hamster__limb--bl"></div>
+                                <div class="hamster__tail"></div>
+                            </div>
+                        </div>
+                        <div class="spoke"></div>
+                    </div>
                 </div>
                 <img id="rankImg">
                 <h1 style="color: rgb(141,153,186);font-weight: bold;font-size: 30px;margin-top: 0px;padding-bottom: 0px;margin-bottom: 40px;" id="rankH1"></h1>
