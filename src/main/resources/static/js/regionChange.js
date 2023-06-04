@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $(document).on("click", "#buttonEUW", function() {
         $("#mainContent").load("blocks/mainBlockEU.html", function() {
-            // AJAX-запрос после загрузки содержимого
+
             $.ajax({
                 url: "/accountData",
                 method: "POST",
@@ -15,7 +15,7 @@ $(document).ready(function() {
                     $("#euPlatinum").text('Stock: ' + data.eu_platinum);
                 },
                 error: function(xhr, status, error) {
-                    // Обработка ошибки AJAX-запроса
+
                     console.log("Ошибка AJAX-запроса:", error);
                 }
             });
@@ -24,7 +24,7 @@ $(document).ready(function() {
 
     $(document).on("click", "#buttonRU", function() {
         $("#mainContent").load("blocks/mainBlockRU.html", function() {
-            // AJAX-запрос после загрузки содержимого
+
             $.ajax({
                 url: "/accountData",
                 method: "POST",
@@ -38,7 +38,7 @@ $(document).ready(function() {
                     $("#ruPlatinum").text('Stock: ' + data.ru_platinum);
                 },
                 error: function(xhr, status, error) {
-                    // Обработка ошибки AJAX-запроса
+
                     console.log("Ошибка AJAX-запроса:", error);
                 }
             });

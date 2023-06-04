@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     .antMatchers("/api/v*/registration/**", "/api/v1/login","/api/v*/recovery/**","/login",
-                            "/register", "/main", "/reset", "/mmrCheck","/mb", "/admin")
+                            "/register", "/main", "/reset", "/mmrCheck","/mb", "/purchaseDetails")
                     .permitAll()
                     .antMatchers("/admin")
                     .hasRole("ADMIN")

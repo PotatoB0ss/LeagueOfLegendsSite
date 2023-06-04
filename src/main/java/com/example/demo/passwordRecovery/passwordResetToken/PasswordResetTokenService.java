@@ -1,5 +1,6 @@
 package com.example.demo.passwordRecovery.passwordResetToken;
 
+import com.example.demo.appuser.AppUser;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class PasswordResetTokenService {
 
     public int setUsed(String token){
         return passwordResetTokenRepository.updateUsed(token);
+    }
+
+    public Optional<PasswordResetToken> getTokenByUser(AppUser user){
+        return passwordResetTokenRepository.findByAppUser(user);
     }
 
 }

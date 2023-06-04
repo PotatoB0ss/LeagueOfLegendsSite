@@ -443,3 +443,8 @@ body {
   width: 80%;
   max-width: 600px;
 }
+
+.card-details__submit:hover{
+  background-color: black;
+  color: black;
+}

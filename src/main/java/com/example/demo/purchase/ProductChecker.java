@@ -1,4 +1,4 @@
-package com.example.demo.utility;
+package com.example.demo.purchase;
 
 import com.example.demo.accounts.AccountService;
 import org.springframework.ui.Model;

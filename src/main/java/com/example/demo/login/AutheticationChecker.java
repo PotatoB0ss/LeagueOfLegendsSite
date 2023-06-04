@@ -15,7 +15,6 @@ public class AutheticationChecker {
 
             AppUser user = (AppUser) authentication.getPrincipal();
 
-
             model.addAttribute("authenticated", true);
             model.addAttribute("username", user.getName());
             return true;

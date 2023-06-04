@@ -15,7 +15,7 @@ import java.util.Map;
 public class CheckMMR {
 
     public String inputData(String username, String server, Map<String, Object> response) {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless","--window-size=1920,1080", "--start-maximized", "--disable-notifications", "--no-sandbox", "--disable-dev-shm-usage");
@@ -71,11 +71,6 @@ public class CheckMMR {
             return "USERNAME OR REGION IS INCORRECT";
         }
 
-
-
-
     }
-
-
 
 }

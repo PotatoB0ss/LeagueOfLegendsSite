@@ -5,7 +5,9 @@ import com.example.demo.accounts.*;
 import com.example.demo.login.AutheticationChecker;
 import com.example.demo.mmrCheck.CheckMMR;
 import com.example.demo.mmrCheck.DataMMR;
-import com.example.demo.utility.ProductChecker;
+import com.example.demo.purchase.ProductChecker;
+import com.example.demo.purchase.Purchase;
+import com.example.demo.purchase.PurchaseDataValidate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,7 +109,6 @@ public class MainController {
 
     }
 
-
     @PostMapping("/accountData")
     @ResponseBody
     public Map<String, Object> getAccountData(Model model){
@@ -120,8 +121,21 @@ public class MainController {
         return accountData;
 
     }
+    @PostMapping("/purchaseDetails")
+    @ResponseBody
+    public String purchaseDetails(Model model, @ModelAttribute Purchase purchase){
+        autheticationChecker.authenticationCheck(model);
+        Map<String, Object> purchaseData = new HashMap<>();
+        purchaseData.put("username", purchase.getUserName());
+        purchaseData.put("email", purchase.getUserEmail());
+        purchaseData.put("amount", purchase.getNumberInput());
+        purchaseData.put("stock", purchase.getStock());
+        purchaseData.put("prodPrice", purchase.getProdPrice());
 
-
+        PurchaseDataValidate purchaseDataValidate = new PurchaseDataValidate();
+        String result = purchaseDataValidate.dataCheck(purchaseData);
+        return result;
+    }
 
 
 }

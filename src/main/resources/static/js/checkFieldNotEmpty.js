@@ -1,5 +1,5 @@
 document.getElementById('continueButton').addEventListener('click', function(event) {
-    event.preventDefault(); // Предотвращаем отправку формы
+    event.preventDefault();
 
     var email = document.getElementById('email').value;
     var forText = document.getElementById('textik');

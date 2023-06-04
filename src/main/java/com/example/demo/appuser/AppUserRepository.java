@@ -20,7 +20,6 @@ public interface AppUserRepository
     @Query("DELETE FROM AppUser a WHERE a.id = ?1")
     void deleteAppUserById(Long id);
 
-
     @Transactional
     @Modifying
     @Query("UPDATE AppUser a " +

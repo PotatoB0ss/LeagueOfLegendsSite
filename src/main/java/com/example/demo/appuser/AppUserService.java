@@ -90,9 +90,6 @@ public class AppUserService implements UserDetailsService {
             }
 
 
-        // ADD CHECK IF TOKEN IS NOT EXPIRED YET
-
-
         String encodedPassword = bCryptPasswordEncoder
                 .encode(appUser.getPassword());
 
@@ -120,14 +117,24 @@ public class AppUserService implements UserDetailsService {
         Optional<AppUser> user = appUserRepository.findByEmail(email);
 
         if (user.isEmpty()) {
-
             return "The user with this email not found";
-
         }
 
         if (!user.get().isEnabled()){
             return "Your email is not verified";
         }
+
+        AppUser appUser = user.get();
+
+        Optional<PasswordResetToken> checkToken = passwordResetTokenService.getTokenByUser(appUser);
+        if(checkToken.isPresent()){
+            LocalDateTime expiredAt = checkToken.get().getExpiresAt();
+            if (!expiredAt.isBefore(LocalDateTime.now())) {
+                return "You already have a token check your email!";
+            }
+
+        }
+
 
         String token = UUID.randomUUID().toString();
 

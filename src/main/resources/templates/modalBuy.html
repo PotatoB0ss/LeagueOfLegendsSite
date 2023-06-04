@@ -8,19 +8,16 @@
 
 
     <link rel="stylesheet" href="/assets/css/modalForm.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/numberInputCheck.js"></script>
 
 
 </head>
-
 
 
 <div class="container">
     <section class="product">
         <div class="product__details">
             <h1 class="product__details-heading" th:text="${prodName}">RU | ACTIVE | 30+</h1>
-            <input type="hidden" th:attr="value=${prodStock}" id="stock">
+
             <span class="product__details-sub-heading"></span>
 
             <div class="product__details-image-wrapper">
@@ -40,8 +37,12 @@
             </div>
         </div>
 
-        <form class="card-details" action="" data-form>
+        <form class="card-details" th:action="@{/purchaseDetails}" method="POST" id="purchaseForm">
             <fieldset class="card-details__fieldset">
+
+                <input type="hidden" th:attr="value=${prodStock}" id="stock" name="stock">
+                <input type="hidden" th:attr="data-initial-price=${prodPrice}, value=${prodPrice}" value=${prodPrice} id="prodPrice" name="prodPrice">
+
 
                 <div class="card-details__cards" data-card-types>
 
@@ -57,7 +58,7 @@
 
                 <div class="card-details__holder">
                     <div class="card-details__number-field">
-                        <input class="card-details__holder-input" type="text" id="cardHolder" data-input>
+                        <input class="card-details__holder-input" type="text" id="userName" name="userName" data-input required>
                     </div>
 
 
@@ -70,8 +71,8 @@
             <fieldset class="card-details__fieldset">
                 <span class="card-details__heading" aria-hidden="true">Enter your email</span>
                 <div class="card-details__holder">
-                    <label class="card-details__holder-label" for="userName"></label>
-                    <input class="card-details__holder-input" type="email" id="userName" data-input>
+                    <label class="card-details__holder-label" for="userEmail"></label>
+                    <input class="card-details__holder-input" type="email" id="userEmail" name="userEmail" data-input required>
                 </div>
             </fieldset>
 
@@ -80,7 +81,7 @@
                     <span class="card-details__heading" aria-hidden="true">Quantity</span>
                     <div class="card-details__expiration-date">
                         <label class="card-details__expiration-date-label" for="numberInput">Amount</label>
-                        <input class="card-details__expiration-date-input" type="number" value="1" id="numberInput" oninput="checkNumberRange()" data-input>
+                        <input class="card-details__expiration-date-input" type="number" value="1" id="numberInput" name="numberInput" oninput="checkNumberRange()" data-input>
                     </div>
                 </div>
 
@@ -93,9 +94,9 @@
                 </div>
             </fieldset>
 
-            <button class="card-details__submit" type="button" data-submit-button>Purchase</button>
+            <button class="card-details__submit" type="submit" data-submit-button>Purchase</button>
         </form>
     </section>
 
-
 </div>
+
