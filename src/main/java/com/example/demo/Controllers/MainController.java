@@ -29,7 +29,7 @@ public class MainController {
     }
 
 
-    @GetMapping(path = "main")
+    @GetMapping(path = "/")
     public String basePage(Model model) {
         autheticationChecker.authenticationCheck(model);
         accountService.getAccountsCount(model);
@@ -40,7 +40,7 @@ public class MainController {
     @GetMapping(path="/register")
     public String register(Model model){
         if (autheticationChecker.authenticationCheck(model)) {
-            return "redirect:/main";
+            return "redirect:/";
         }
         return "register";
     }
@@ -56,7 +56,7 @@ public class MainController {
     @GetMapping(path = "/login")
     public String login(Model model){
         if (autheticationChecker.authenticationCheck(model)) {
-            return "redirect:/main";
+            return "redirect:/";
         }
         return "loggin";
     }
@@ -64,14 +64,14 @@ public class MainController {
     @GetMapping(path = "/logout")
     public String logout(){
         SecurityContextHolder.getContext().setAuthentication(null);
-        return "redirect:/main";
+        return "redirect:/";
     }
 
 
     @GetMapping(path ="reset")
     public String reset(Model model){
         if (autheticationChecker.authenticationCheck(model)) {
-            return "redirect:/main";
+            return "redirect:/";
         }
         return "passwordReset/passwordRecovery";
     }

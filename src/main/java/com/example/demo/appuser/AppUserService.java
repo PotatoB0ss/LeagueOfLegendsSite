@@ -148,7 +148,7 @@ public class AppUserService implements UserDetailsService {
         passwordResetTokenService.savePasswordResetToken(
                 passwordResetToken);
 
-        String link = "http://localhost:8080/api/v1/recovery/resetPass?token=" + token;
+        String link = "https://leaguegang.lol/api/v1/recovery/resetPass?token=" + token;
 
         emailSender.send(
                 user.get().getEmail(),
