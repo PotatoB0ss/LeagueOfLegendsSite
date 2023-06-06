@@ -1,6 +1,7 @@
 package com.example.demo.passwordRecovery;
 
 import com.example.demo.appuser.AppUserService;
+import com.example.demo.captcha.RecaptchaService;
 import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +14,16 @@ public class RecoveryController {
 
     private final RecoveryService recoveryService;
     private final AppUserService appUserService;
+    private final RecaptchaService recaptchaService;
 
     @PostMapping(path = "reset")
-    public String reset(@RequestParam("email") String email){
-        return appUserService.resetUserPassword(email);
+    public String reset(@RequestParam("email") String email, @RequestParam("recaptchaResponse") String recaptchaResponse){
+        boolean isValidRecaptcha = recaptchaService.verifyRecaptcha(recaptchaResponse);
+        if (isValidRecaptcha) {
+            return appUserService.resetUserPassword(email);
+        } else {
+            return "Error: incorrect reCAPTCHA";
+        }
     }
 
     @GetMapping(path = "resetPass")

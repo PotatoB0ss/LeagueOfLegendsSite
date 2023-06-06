@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/assets/css/Pretty-Footer-.css">
     <link rel="stylesheet" href="/assets/css/Projects-Grid-images.css">
     <link rel="stylesheet" href="/assets/css/Signup-page-with-overlay.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 
 <body style="background: var(--bs-gray-300);height: 100%;width: 100%;">
@@ -49,9 +51,13 @@
                                         <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                                     </div>
 
+
+                                    <div class="g-recaptcha mb-3" data-sitekey="6LcWdjEmAAAAAAWz0cypxSL7yHS1FAZ-5UCybihU"></div>
+                                    <input type="hidden" name="recaptchaResponse" id="recaptchaResponse" />
+
                                     <h3 class="mb-3" id="loginError"> </h3>
 
-                                    <button type="submit" class="btn btn-theme">Login</button>
+                                    <button type="submit" class="btn btn-theme" id="loginButton">Login</button>
                                     
                                 </form>
                                 
@@ -91,6 +97,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/logginError.js"></script>
+    <script src="/js/checkLoginFieldsNotEmpty.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/Animated-Pretty-Product-List-v12-Animated-Pretty-Product-List.js"></script>
 </body>

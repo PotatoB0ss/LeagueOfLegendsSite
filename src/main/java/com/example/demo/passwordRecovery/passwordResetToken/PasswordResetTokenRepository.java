@@ -25,4 +25,9 @@ extends JpaRepository<PasswordResetToken, Long> {
             "WHERE c.token = ?1")
     int updateUsed(String token);
 
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM PasswordResetToken c WHERE c.token = ?1")
+    int deleteByToken(String token);
+
 }

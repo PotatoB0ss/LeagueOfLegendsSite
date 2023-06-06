@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -112,6 +113,7 @@ public class AppUserService implements UserDetailsService {
         return token;
     }
 
+    @Transactional
     public String resetUserPassword(String email){
 
         Optional<AppUser> user = appUserRepository.findByEmail(email);
@@ -127,12 +129,19 @@ public class AppUserService implements UserDetailsService {
         AppUser appUser = user.get();
 
         Optional<PasswordResetToken> checkToken = passwordResetTokenService.getTokenByUser(appUser);
+
+        if(checkToken.isPresent()){
+            LocalDateTime expiredAt = checkToken.get().getExpiresAt();
+            if (expiredAt.isBefore(LocalDateTime.now())) {
+                passwordResetTokenService.deleteToken(checkToken.get().getToken());
+            }
+        }
+
         if(checkToken.isPresent()){
             LocalDateTime expiredAt = checkToken.get().getExpiresAt();
             if (!expiredAt.isBefore(LocalDateTime.now())) {
                 return "You already have a token check your email!";
             }
-
         }
 
 

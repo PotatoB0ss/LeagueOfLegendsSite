@@ -30,4 +30,8 @@ public class PasswordResetTokenService {
         return passwordResetTokenRepository.findByAppUser(user);
     }
 
+    public int deleteToken(String token){
+        return passwordResetTokenRepository.deleteByToken(token);
+    }
+
 }

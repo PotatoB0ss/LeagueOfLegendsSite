@@ -8,9 +8,17 @@ document.getElementById('continueButton').addEventListener('click', function(eve
         return;
     }
 
-    var url = 'api/v1/recovery/reset?email=' + encodeURIComponent(email);
+    var captchaResponse = grecaptcha.getResponse(); // Получаем ответ капчи
+
+    // Проверяем, что капча была успешно заполнена
+    if (captchaResponse === "") {
+        alert('Please complete the captcha');
+        return;
+    }
+
+    var url = 'api/v1/recovery/reset';
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', url, true);
+    xhr.open('POST', url + '?email=' + encodeURIComponent(email) + '&recaptchaResponse=' + encodeURIComponent(captchaResponse), true);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.onreadystatechange = function() {
@@ -21,6 +29,8 @@ document.getElementById('continueButton').addEventListener('click', function(eve
             } else {
                 $('#textik').css('background-color', 'rgba(255, 0, 0, 0.1)');
             }
+
+            grecaptcha.reset();
 
         }
     };

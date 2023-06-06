@@ -1,5 +1,6 @@
 package com.example.demo.login;
 
+import com.example.demo.captcha.RecaptchaService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,24 +22,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     private DaoAuthenticationProvider daoAuthenticationProvider;
+    private final RecaptchaService recaptchaService;
 
     @PostMapping()
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password){
-        try {
-            UsernamePasswordAuthenticationToken authRequest =
-                    new UsernamePasswordAuthenticationToken(email, password);
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("recaptchaResponse") String recaptchaResponse){
+        boolean isValidRecaptcha = recaptchaService.verifyRecaptcha(recaptchaResponse);
+        if (isValidRecaptcha) {
+            try {
+                UsernamePasswordAuthenticationToken authRequest =
+                        new UsernamePasswordAuthenticationToken(email, password);
 
-            Authentication authentication = daoAuthenticationProvider.authenticate(authRequest);
+                Authentication authentication = daoAuthenticationProvider.authenticate(authRequest);
 
-            log.debug("==AUTHENTICATION==\n{}\n ==END==", authentication);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                log.debug("==AUTHENTICATION==\n{}\n ==END==", authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            return "redirect:/main";
+                return "redirect:/";
+            }
+            catch (AuthenticationException e){
+                return "redirect:/login?error=IncorrectData";
+            }
+        } else {
+            return "Error: incorrect reCAPTCHA";
         }
-        catch (AuthenticationException e){
-
-            return "redirect:/login?error=IncorrectData";
-        }
-
     }
 }
