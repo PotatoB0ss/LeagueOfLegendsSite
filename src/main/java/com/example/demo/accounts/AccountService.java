@@ -4,8 +4,12 @@ package com.example.demo.accounts;
 
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -35,6 +39,22 @@ public class AccountService {
         model.addAttribute("eu_platinum", accountRepository.findByAccountRegionAndAccountCategory(AccountRegion.EU, AccountCategory.PLATINUM));
 
         return model;
+    }
+
+    public Page<Account> getAccounts(AccountRegion accountRegion, AccountCategory accountStatus, Pageable pageable){
+        return accountRepository.fAccs(accountRegion, accountStatus, pageable);
+    }
+
+    public void deleteAccounts(List<Account> accounts){
+        accountRepository.deleteAll(accounts);
+    }
+
+    public void setAccountsOrder(List<Account> accounts, Long orderId){
+        accountRepository.updateOrderIdsForAccounts(accounts, orderId);
+    }
+
+    public List<Account> findAccountByOrderId(Long orderId){
+        return accountRepository.findAccountsByOrderId(orderId);
     }
 
 

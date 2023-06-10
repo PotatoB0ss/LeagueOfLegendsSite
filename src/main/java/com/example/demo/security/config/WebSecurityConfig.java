@@ -27,11 +27,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf()
+                .ignoringAntMatchers("/successfulPayment")
+                .and()
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .authorizeRequests()
                     .antMatchers("/api/v*/registration/**", "/api/v1/login","/api/v*/recovery/**","/login",
-                            "/register", "/main", "/reset", "/mmrCheck","/mb", "/purchaseDetails", "/")
+                            "/register", "/main", "/reset", "/mmrCheck","/mb", "/purchaseDetails", "/", "/successfulPayment", "/productGive", "/accounts")
                     .permitAll()
                     .antMatchers("/admin")
                     .hasRole("ADMIN")
@@ -43,9 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/register")
                     .invalidateHttpSession(true) // Очистка HTTP-сессии
                     .clearAuthentication(true)
-                    .deleteCookies("JSESSIONID") // Удаление куки, если необходимо
+                    .deleteCookies("JSESSIONID")
                     .permitAll();
-
     }
 
 
@@ -55,16 +57,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/bootstrap/**", "/css/**", "/js/**", "/assets/**",
                         "/assets/**/**", "/assets/**/**/**", "/assets/js/**", "/api/v1/registration/check**", "/blocks/**",
-                        "/api/v1/recovery/**", "/passwordReset/**", "/mmrChecks", "/accountData");
+                        "/api/v1/recovery/**", "/passwordReset/**", "/mmrChecks");
     }
-
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
-
 
 
     @Bean

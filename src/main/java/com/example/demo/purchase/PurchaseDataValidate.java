@@ -6,7 +6,6 @@ import java.util.Map;
 public class PurchaseDataValidate {
 
     public String dataCheck(Map<String, Object> product){
-        System.out.println("HIHIHIHIHIHI");
 
         int amount = Integer.parseInt( product.get("amount").toString());
         if(0 >= amount){
@@ -25,8 +24,13 @@ public class PurchaseDataValidate {
             return "Sorry accounts in stock are " + Integer.parseInt(product.get("stock").toString());
         }
 
+        BigDecimal exchangeRate = new BigDecimal("80.00");
+        BigDecimal multiplyPrice = finalPrice.multiply(exchangeRate);
+        Float finalRUBPrice = multiplyPrice.floatValue();
+        product.put("finalRUBPrice", finalRUBPrice);
 
-        return "Purchase order formed";
+
+        return "successfully";
     }
 
 

@@ -15,4 +15,5 @@ public class Purchase {
     private final Integer numberInput;
     private final Integer stock;
     private final String prodPrice;
+    private final String prodName;
 }

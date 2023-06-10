@@ -58,16 +58,15 @@ public class CheckMMR {
         inputElement.sendKeys(username);
         searchButton.click();
 
-
-
         try{
             WebElement rank = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p.approximrank span")));
             WebElement mmr = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.rankstatsn")));
             response.put("elo", rank.getText());
             response.put("mmr", mmr.getText());
+            driver.close();
             return "RESULTS FOR " + username;
         }catch (TimeoutException e){
-
+            driver.close();
             return "USERNAME OR REGION IS INCORRECT";
         }
 

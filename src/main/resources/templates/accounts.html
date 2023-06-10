@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your order</title>
+</head>
+<body>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>login:password</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="account : ${accounts}">
+        <td th:text="${account.getData()}">login:password</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

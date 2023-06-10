@@ -49,7 +49,7 @@ public class RegistrationService {
                 request.getEmail(),
                 buildEmail(request.getUserName(), link));
 
-        return "CHECK YOUR EMAIL! :)";
+        return "CHECK YOUR EMAIL! :) --- If you didn't receive the message, check your spam";
     }
 
     @Transactional

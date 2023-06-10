@@ -34,6 +34,8 @@ public class Account {
     private AccountRegion accountRegion;
     @Enumerated(EnumType.STRING)
     private AccountCategory accountCategory;
+    @Column(nullable = true)
+    private Long orderId;
 
     public Account(Long id, String data, AccountRegion accountRegion, AccountCategory accountCategory) {
         this.id = id;
