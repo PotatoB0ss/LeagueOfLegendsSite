@@ -3,11 +3,11 @@ package com.example.demo.mmrCheck;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +15,17 @@ import java.util.Map;
 public class CheckMMR {
 
     public String inputData(String username, String server, Map<String, Object> response) {
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
+
+
+        Proxy proxy = new Proxy();
+        proxy.setHttpProxy("http://drafasenos317:BsRdqfq3oX@185.228.192.215:59100");
+        proxy.setSslProxy("https://drafasenos317:BsRdqfq3oX@185.228.192.215:59100");
+
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless","--window-size=1920,1080", "--start-maximized", "--disable-notifications", "--no-sandbox", "--disable-dev-shm-usage");
-
+        options.setCapability("proxy", proxy);
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
         WebDriver driver = new ChromeDriver(options);
 
 
@@ -46,6 +52,11 @@ public class CheckMMR {
             wait.until(ExpectedConditions.visibilityOf(cookieAccept));
             cookieAccept.click();
         }
+        Proxy usedProxy = (Proxy) ((ChromeDriver) driver).getCapabilities().getCapability("proxy");
+        String usedHttpProxy = usedProxy.getHttpProxy();
+        String usedSslProxy = usedProxy.getSslProxy();
+        System.out.println(usedHttpProxy);
+        System.out.println(usedSslProxy);
 
 
         String reg = String.format("div[data-value='%s']", resultServer);
@@ -63,10 +74,10 @@ public class CheckMMR {
             WebElement mmr = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.rankstatsn")));
             response.put("elo", rank.getText());
             response.put("mmr", mmr.getText());
-            driver.close();
+            driver.quit();
             return "RESULTS FOR " + username;
         }catch (TimeoutException e){
-            driver.close();
+            driver.quit();
             return "USERNAME OR REGION IS INCORRECT";
         }
 

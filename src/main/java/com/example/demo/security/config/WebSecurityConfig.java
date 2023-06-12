@@ -27,14 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .ignoringAntMatchers("/successfulPayment")
-                .and()
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .authorizeRequests()
                     .antMatchers("/api/v*/registration/**", "/api/v1/login","/api/v*/recovery/**","/login",
-                            "/register", "/main", "/reset", "/mmrCheck","/mb", "/purchaseDetails", "/", "/successfulPayment", "/productGive", "/accounts")
+                            "/register", "/main", "/reset", "/mmrCheck","/mb", "/")
                     .permitAll()
                     .antMatchers("/admin")
                     .hasRole("ADMIN")
